@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>هوش‌ساز | ایده‌ات رو به واقعیت تبدیل کن</title>
+<meta name="description" content="هوش‌ساز؛ استودیوی تولید محتوا و طراحی با هوش مصنوعی. ساخت تصویر، ویدیو، گرافیک، لوگو و پرامپت حرفه‌ای برای کسب‌وکار و کانال شما.">
+<meta name="keywords" content="هوش مصنوعی, تولید محتوا, پرامپت نویسی, طراحی لوگو, ساخت ویدیو با هوش مصنوعی, هوش ساز">
+<meta property="og:type" content="website">
+<meta property="og:title" content="هوش‌ساز | ایده‌ات رو به واقعیت تبدیل کن">
+<meta property="og:description" content="استودیوی هوش مصنوعی برای ساخت تصویر، ویدیو، محتوا و ایده.">
+<meta property="og:locale" content="fa_IR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0a09'/%3E%3Cpath d='M20 46V18h7v11.5h10V18h7v28h-7V35.8H27V46z' fill='%23ff6a1f'/%3E%3Ccircle cx='47' cy='16' r='4' fill='%23ff6a1f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   هوش‌ساز — Design Tokens
+   ============================================================ */
+:root{
+  --bg:#0a0908;
+  --bg-alt:#121110;
+  --surface:#17140f;
+  --surface-2:#1d1a15;
+  --border:rgba(255,255,255,.08);
+  --border-strong:rgba(255,255,255,.16);
+  --text:#f4efe7;
+  --text-dim:#a89d8d;
+  --text-faint:#6d6355;
+  --accent:#ff6a1f;
+  --accent-2:#ffb37a;
+  --accent-deep:#c1440e;
+  --radius-sharp:6px;
+  --radius-soft:30px;
+  --radius-pill:999px;
+  --shadow-1: 0 1px 0 rgba(255,255,255,.04) inset, 0 20px 50px -25px rgba(0,0,0,.7);
+  --shadow-glow: 0 0 0 1px rgba(255,106,31,.25), 0 20px 60px -20px rgba(255,106,31,.35);
+  --ease: cubic-bezier(.22,1,.36,1);
+  --maxw: 1200px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Vazirmatn', Tahoma, sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block; max-width:100%;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer;}
+ul{list-style:none; margin:0; padding:0;}
+h1,h2,h3,h4,p{margin:0;}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
+
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+@media(max-width:640px){.wrap{padding:0 18px;}}
+
+.section{padding:110px 0;}
+@media(max-width:900px){.section{padding:76px 0;}}
+
+.section-head{max-width:640px; margin-bottom:56px;}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--accent-2); font-weight:600; font-size:.95rem; margin-bottom:14px;
+}
+.eyebrow::before{content:""; width:16px; height:2px; background:var(--accent); border-radius:2px;}
+.section-title{
+  font-size:clamp(1.7rem, 2.6vw, 2.5rem);
+  font-weight:800;
+  letter-spacing:-.01em;
+  color:var(--text);
+}
+.section-desc{margin-top:14px; color:var(--text-dim); font-size:1.05rem; max-width:56ch;}
+
+/* Buttons */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:15px 30px; font-weight:700; font-size:1rem;
+  border-radius:var(--radius-pill); border:1px solid transparent;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .3s, border-color .3s;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:linear-gradient(135deg, var(--accent), var(--accent-deep));
+  color:#100905;
+  box-shadow:0 14px 34px -12px rgba(255,106,31,.55);
+}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 20px 40px -12px rgba(255,106,31,.7);}
+.btn-ghost{
+  background:transparent; color:var(--text); border-color:var(--border-strong);
+}
+.btn-ghost:hover{border-color:var(--accent); color:var(--accent-2); transform:translateY(-2px);}
+.btn-sm{padding:10px 20px; font-size:.9rem;}
+.btn-block{width:100%;}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.site-header{
+  position:fixed; inset-inline:0; top:0; z-index:100;
+  padding:18px 0;
+  transition:background .4s var(--ease), padding .4s var(--ease), border-color .4s;
+  border-bottom:1px solid transparent;
+}
+.site-header.is-stuck{
+  padding:12px 0;
+  background:rgba(10,9,8,.82);
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  border-bottom-color:var(--border);
+}
+.header-row{display:flex; align-items:center; justify-content:space-between; gap:24px;}
+.brand{display:flex; align-items:center; gap:12px; font-weight:800; font-size:1.15rem;}
+.brand svg{width:38px; height:38px;}
+.brand-name b{color:var(--accent-2);}
+.main-nav{display:flex; align-items:center; gap:6px;}
+.main-nav a{
+  padding:10px 16px; border-radius:var(--radius-pill); color:var(--text-dim);
+  font-weight:500; font-size:.96rem; transition:color .25s, background .25s;
+}
+.main-nav a:hover{color:var(--text); background:rgba(255,255,255,.05);}
+.header-actions{display:flex; align-items:center; gap:14px;}
+.hamburger{
+  display:none; width:44px; height:44px; border-radius:var(--radius-sharp);
+  border:1px solid var(--border-strong); background:transparent; position:relative;
+}
+.hamburger span, .hamburger span::before, .hamburger span::after{
+  content:""; position:absolute; inset-inline:11px; height:2px; background:var(--text);
+  transition:transform .3s var(--ease), opacity .3s;
+}
+.hamburger span{top:21px;}
+.hamburger span::before{top:-7px;}
+.hamburger span::after{top:7px;}
+.hamburger[aria-expanded="true"] span{background:transparent;}
+.hamburger[aria-expanded="true"] span::before{transform:translateY(7px) rotate(45deg);}
+.hamburger[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg);}
+
+.mobile-nav{
+  display:none; position:fixed; inset:0; top:0; z-index:99;
+  background:var(--bg); padding:100px 24px 40px; opacity:0; pointer-events:none;
+  transition:opacity .35s var(--ease);
+}
+.mobile-nav.is-open{opacity:1; pointer-events:auto;}
+.mobile-nav ul{display:flex; flex-direction:column; gap:6px;}
+.mobile-nav a{display:block; padding:16px 6px; font-size:1.2rem; font-weight:700; border-bottom:1px solid var(--border);}
+.mobile-nav .btn{margin-top:24px;}
+
+@media(max-width:900px){
+  .main-nav{display:none;}
+  .header-actions .btn-primary{display:none;}
+  .hamburger{display:block;}
+  .mobile-nav{display:block;}
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{position:relative; padding:170px 0 110px; overflow:hidden;}
+.hero-grid{
+  position:absolute; inset:0; z-index:0; opacity:.35;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 60% 50% at 70% 30%, black, transparent 75%);
+}
+.hero-row{position:relative; z-index:1; display:grid; grid-template-columns:1.1fr .9fr; gap:50px; align-items:center;}
+@media(max-width:980px){.hero-row{grid-template-columns:1fr; gap:56px;}}
+.hero-title{
+  font-size:clamp(2.2rem, 5vw, 3.6rem); font-weight:900; letter-spacing:-.02em; line-height:1.28;
+}
+.hero-title .hl{color:var(--accent); position:relative;}
+.hero-sub{margin-top:22px; font-size:1.15rem; color:var(--text-dim); max-width:52ch;}
+.hero-cta{display:flex; gap:16px; margin-top:36px; flex-wrap:wrap;}
+.hero-tags{display:flex; gap:10px; margin-top:40px; flex-wrap:wrap;}
+.hero-tags span{
+  font-size:.85rem; color:var(--text-faint); border:1px solid var(--border); padding:8px 14px;
+  border-radius:var(--radius-pill);
+}
+
+.hero-art{position:relative; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;}
+.hero-art .glow{
+  position:absolute; width:70%; height:70%; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,106,31,.45), transparent 70%);
+  filter:blur(30px); animation:pulse 6s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1); opacity:.9;} 50%{transform:scale(1.08); opacity:1;}}
+.hero-art svg{position:relative; z-index:1; width:100%; height:100%;}
+.orbit{transform-origin:center; animation:spin 26s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ============================================================
+   Services
+   ============================================================ */
+.svc-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+@media(max-width:980px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.svc-grid{grid-template-columns:1fr;}}
+.svc-card{
+  padding:30px 26px; background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius-soft) var(--radius-sharp) var(--radius-soft) var(--radius-sharp);
+  transition:transform .4s var(--ease), border-color .4s, background .4s;
+  position:relative; overflow:hidden;
+}
+.svc-card::after{
+  content:""; position:absolute; inset:0; opacity:0; transition:opacity .4s;
+  background:radial-gradient(220px 140px at 85% -10%, rgba(255,106,31,.18), transparent 70%);
+}
+.svc-card:hover{transform:translateY(-6px); border-color:var(--border-strong); background:var(--surface-2);}
+.svc-card:hover::after{opacity:1;}
+.svc-icon{
+  width:52px; height:52px; border-radius:16px 6px 16px 6px; background:rgba(255,106,31,.12);
+  display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+  border:1px solid rgba(255,106,31,.25);
+}
+.svc-icon svg{width:26px; height:26px; stroke:var(--accent-2);}
+.svc-card h3{font-size:1.12rem; font-weight:700; margin-bottom:10px;}
+.svc-card p{color:var(--text-dim); font-size:.94rem;}
+.svc-more{display:inline-flex; align-items:center; gap:6px; margin-top:16px; color:var(--accent-2); font-weight:600; font-size:.9rem;}
+.svc-more svg{width:14px; height:14px; transition:transform .3s;}
+.svc-card:hover .svc-more svg{transform:translateX(-4px);}
+
+/* ============================================================
+   Tools Dashboard
+   ============================================================ */
+.dash{
+  display:grid; grid-template-columns:260px 1fr; gap:0;
+  border:1px solid var(--border); border-radius:26px; overflow:hidden;
+  background:var(--surface);
+}
+@media(max-width:860px){.dash{grid-template-columns:1fr;}}
+.dash-tabs{background:var(--bg-alt); border-inline-start:1px solid var(--border); padding:14px;}
+@media(max-width:860px){.dash-tabs{border-inline-start:none; border-bottom:1px solid var(--border); display:flex; overflow-x:auto; gap:8px; padding:14px;}}
+.dash-tab{
+  display:flex; align-items:center; gap:10px; width:100%; text-align:right;
+  padding:13px 14px; border-radius:12px; background:transparent; border:1px solid transparent;
+  color:var(--text-dim); font-size:.92rem; font-weight:600; white-space:nowrap;
+  transition:background .25s, color .25s;
+}
+@media(max-width:860px){.dash-tab{width:auto;}}
+.dash-tab:hover{background:rgba(255,255,255,.04); color:var(--text);}
+.dash-tab.is-active{background:rgba(255,106,31,.13); color:var(--accent-2); border-color:rgba(255,106,31,.3);}
+.dash-tab .ic{font-size:1.05rem;}
+
+.dash-panel{padding:36px; display:none;}
+.dash-panel.is-active{display:block; animation:fadein .4s var(--ease);}
+@keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+.dash-panel h3{font-size:1.3rem; font-weight:800; margin-bottom:6px;}
+.dash-panel .hint{color:var(--text-dim); font-size:.92rem; margin-bottom:24px;}
+.field{margin-bottom:16px;}
+.field label{display:block; font-size:.88rem; color:var(--text-dim); margin-bottom:8px; font-weight:600;}
+.field input[type="text"], .field textarea, .field select{
+  width:100%; background:var(--bg-alt); border:1px solid var(--border-strong); color:var(--text);
+  padding:13px 15px; border-radius:12px; font-family:inherit; font-size:.96rem;
+  transition:border-color .25s, box-shadow .25s;
+}
+.field textarea{min-height:96px; resize:vertical;}
+.field input:focus, .field textarea:focus, .field select:focus{border-color:var(--accent); box-shadow:0 0 0 3px rgba(255,106,31,.15);}
+.field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+@media(max-width:560px){.field-row{grid-template-columns:1fr;}}
+.dash-actions{display:flex; gap:12px; margin-top:6px;}
+.result-box{
+  margin-top:24px; background:var(--bg-alt); border:1px dashed var(--border-strong);
+  border-radius:16px; padding:20px; min-height:70px; white-space:pre-wrap; font-size:.95rem;
+  color:var(--text); position:relative;
+}
+.result-box.is-empty{color:var(--text-faint); display:flex; align-items:center; justify-content:center; text-align:center;}
+.result-actions{display:flex; gap:10px; margin-top:12px;}
+.result-actions button{
+  font-size:.82rem; padding:8px 14px; border-radius:var(--radius-pill); border:1px solid var(--border-strong);
+  background:transparent; color:var(--text-dim);
+}
+.result-actions button:hover{color:var(--accent-2); border-color:var(--accent);}
+
+/* ============================================================
+   Idea of the day
+   ============================================================ */
+.idea-box{
+  border:1px solid var(--border); border-radius:var(--radius-soft);
+  background:linear-gradient(160deg, var(--surface), var(--bg-alt));
+  padding:44px; display:grid; grid-template-columns:1fr auto; gap:30px; align-items:center;
+}
+@media(max-width:760px){.idea-box{grid-template-columns:1fr; text-align:center;}}
+.idea-cards{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+@media(max-width:900px){.idea-cards{grid-template-columns:repeat(2,1fr);}}
+.idea-card{background:var(--bg-alt); border:1px solid var(--border); border-radius:16px; padding:18px;}
+.idea-card .tag{font-size:.76rem; color:var(--accent-2); font-weight:700; margin-bottom:8px; display:block;}
+.idea-card p{font-size:.9rem; color:var(--text-dim);}
+
+/* ============================================================
+   Portfolio
+   ============================================================ */
+.filters{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px;}
+.filter-btn{
+  padding:9px 20px; border-radius:var(--radius-pill); border:1px solid var(--border-strong);
+  background:transparent; color:var(--text-dim); font-size:.9rem; font-weight:600; transition:.25s;
+}
+.filter-btn.is-active, .filter-btn:hover{background:var(--accent); color:#100905; border-color:var(--accent);}
+.pf-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+@media(max-width:900px){.pf-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.pf-grid{grid-template-columns:1fr;}}
+.pf-item{border-radius:22px; overflow:hidden; border:1px solid var(--border); background:var(--surface); transition:.4s var(--ease); cursor:default;}
+.pf-item.is-hidden{display:none;}
+.pf-item:hover{transform:translateY(-6px); border-color:var(--border-strong);}
+.pf-thumb{aspect-ratio:4/3; position:relative; overflow:hidden;}
+.pf-thumb .ph{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:2rem; font-weight:900; color:rgba(255,255,255,.5);
+  transition:transform .5s var(--ease);
+}
+.pf-item:hover .ph{transform:scale(1.08);}
+.pf-body{padding:20px;}
+.pf-cat{font-size:.78rem; color:var(--accent-2); font-weight:700; margin-bottom:6px; display:block;}
+.pf-body h4{font-size:1.02rem; font-weight:700; margin-bottom:6px;}
+.pf-body p{font-size:.88rem; color:var(--text-dim);}
+
+/* ============================================================
+   Before / After
+   ============================================================ */
+.ba-wrap{
+  position:relative; max-width:820px; margin:0 auto; aspect-ratio:16/9; border-radius:26px; overflow:hidden;
+  border:1px solid var(--border); user-select:none;
+}
+.ba-layer{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.4rem;}
+.ba-after{background:linear-gradient(135deg,#1c1712,#3a2214); color:var(--accent-2);}
+.ba-before{background:linear-gradient(135deg,#232323,#0e0e0e); color:var(--text-faint); clip-path:inset(0 0 0 50%);}
+.ba-label{position:absolute; top:16px; font-size:.78rem; font-weight:700; padding:6px 14px; border-radius:var(--radius-pill); background:rgba(0,0,0,.55); color:#fff;}
+.ba-label.l-before{left:16px;}
+.ba-label.l-after{right:16px;}
+.ba-handle{
+  position:absolute; top:0; bottom:0; left:50%; width:0; display:flex; align-items:center; justify-content:center;
+}
+.ba-line{position:absolute; inset-block:0; width:2px; background:#fff; box-shadow:0 0 20px rgba(0,0,0,.4);}
+.ba-grip{
+  width:44px; height:44px; border-radius:50%; background:var(--accent); color:#100905;
+  display:flex; align-items:center; justify-content:center; font-weight:900; box-shadow:0 8px 22px rgba(255,106,31,.5);
+}
+.ba-range{position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:ew-resize;}
+
+/* ============================================================
+   Process
+   ============================================================ */
+.process-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px; position:relative;}
+@media(max-width:900px){.process-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.process-grid{grid-template-columns:1fr;}}
+.step{position:relative; padding-top:8px;}
+.step .num{font-size:2.6rem; font-weight:900; color:transparent; -webkit-text-stroke:1.5px var(--border-strong); margin-bottom:14px; display:block;}
+.step h4{font-size:1.08rem; font-weight:700; margin-bottom:8px;}
+.step p{color:var(--text-dim); font-size:.92rem;}
+
+/* ============================================================
+   Education / Blog
+   ============================================================ */
+.edu-grid, .blog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+@media(max-width:900px){.edu-grid, .blog-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.edu-grid, .blog-grid{grid-template-columns:1fr;}}
+.edu-card{
+  background:var(--surface); border:1px solid var(--border); border-radius:6px 26px 6px 26px;
+  padding:26px; transition:.35s var(--ease);
+}
+.edu-card:hover{border-color:var(--border-strong); transform:translateY(-4px);}
+.edu-meta{display:flex; align-items:center; gap:10px; color:var(--text-faint); font-size:.8rem; margin-bottom:14px;}
+.edu-card h4{font-size:1.05rem; font-weight:700; margin-bottom:8px;}
+.edu-card p{color:var(--text-dim); font-size:.9rem; margin-bottom:16px;}
+.blog-card{background:var(--surface); border:1px solid var(--border); border-radius:22px; overflow:hidden;}
+.blog-thumb{aspect-ratio:16/10; background:linear-gradient(135deg, var(--surface-2), var(--bg-alt)); display:flex; align-items:center; justify-content:center; color:var(--text-faint); font-weight:800;}
+.blog-body{padding:22px;}
+.blog-cat{font-size:.76rem; color:var(--accent-2); font-weight:700;}
+.blog-body h4{margin-top:8px; font-size:1.02rem; font-weight:700;}
+.blog-body p{margin-top:8px; color:var(--text-dim); font-size:.88rem;}
+
+/* ============================================================
+   Stats
+   ============================================================ */
+.stats-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center;}
+@media(max-width:760px){.stats-grid{grid-template-columns:1fr 1fr;}}
+.stat{padding:34px 16px; border:1px solid var(--border); border-radius:22px; background:var(--surface);}
+.stat .n{font-size:2.6rem; font-weight:900; color:var(--accent-2);}
+.stat .l{margin-top:8px; color:var(--text-dim); font-size:.92rem;}
+
+/* ============================================================
+   Contact CTA
+   ============================================================ */
+.cta-panel{
+  position:relative; overflow:hidden; text-align:center; padding:72px 30px;
+  border-radius:var(--radius-soft); border:1px solid var(--border);
+  background:radial-gradient(600px 300px at 50% 0%, rgba(255,106,31,.16), transparent 70%), var(--surface);
+}
+.cta-panel h2{font-size:clamp(1.6rem,3vw,2.3rem); font-weight:800;}
+.cta-panel p{margin-top:14px; color:var(--text-dim); max-width:52ch; margin-inline:auto;}
+.cta-panel .btn{margin-top:30px;}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer{background:var(--bg-alt); border-top:1px solid var(--border); padding:70px 0 30px;}
+.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:36px;}
+@media(max-width:860px){.footer-grid{grid-template-columns:1fr 1fr; gap:34px;}}
+@media(max-width:520px){.footer-grid{grid-template-columns:1fr;}}
+.footer-brand{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.1rem; margin-bottom:14px;}
+.footer-brand svg{width:32px; height:32px;}
+.site-footer p.desc{color:var(--text-dim); font-size:.9rem; max-width:32ch;}
+.footer-col h5{font-size:.92rem; font-weight:700; margin-bottom:16px; color:var(--text);}
+.footer-col ul li{margin-bottom:10px;}
+.footer-col a{color:var(--text-dim); font-size:.9rem; transition:color .25s;}
+.footer-col a:hover{color:var(--accent-2);}
+.footer-bottom{
+  margin-top:50px; padding-top:24px; border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  color:var(--text-faint); font-size:.83rem;
+}
+.footer-social{display:flex; gap:10px;}
+.footer-social a{
+  width:38px; height:38px; border:1px solid var(--border-strong); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:1rem;
+}
+.footer-social a:hover{border-color:var(--accent); color:var(--accent-2);}
+
+/* ============================================================
+   Floating Action Button
+   ============================================================ */
+.fab-wrap{position:fixed; bottom:26px; left:26px; z-index:200;}
+@media(max-width:560px){.fab-wrap{bottom:18px; left:18px;}}
+.fab-menu{
+  position:absolute; bottom:66px; left:0; min-width:220px;
+  background:var(--surface-2); border:1px solid var(--border-strong); border-radius:18px;
+  padding:10px; box-shadow:var(--shadow-1);
+  opacity:0; transform:translateY(10px) scale(.96); pointer-events:none; transform-origin:bottom left;
+  transition:opacity .28s var(--ease), transform .28s var(--ease);
+}
+.fab-menu.is-open{opacity:1; transform:translateY(0) scale(1); pointer-events:auto;}
+.fab-menu a, .fab-menu button{
+  display:flex; align-items:center; gap:10px; width:100%; text-align:right;
+  padding:12px 14px; border-radius:12px; color:var(--text); font-size:.9rem; background:transparent; border:none;
+}
+.fab-menu a:hover, .fab-menu button:hover{background:rgba(255,106,31,.12); color:var(--accent-2);}
+.fab-btn{
+  display:flex; align-items:center; gap:10px; padding:16px 22px; border-radius:var(--radius-pill);
+  background:linear-gradient(135deg, var(--accent), var(--accent-deep)); color:#100905; font-weight:800;
+  box-shadow:0 16px 36px -10px rgba(255,106,31,.6); border:none;
+}
+.fab-btn:hover{transform:translateY(-2px);}
+
+/* Scroll reveal */
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .7s var(--ease), transform .7s var(--ease);}
+.reveal.is-visible{opacity:1; transform:translateY(0);}
+
+/* Screen-reader only */
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     Header
+     ============================================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-row">
+    <a href="#home" class="brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#17140f"/><path d="M20 46V18h7v11.5h10V18h7v28h-7V35.8H27V46z" fill="#ff6a1f"/><circle cx="47" cy="16" r="4" fill="#ff6a1f"/></svg>
+      <span class="brand-name">هوش<b>ساز</b></span>
+    </a>
+    <nav class="main-nav" aria-label="منوی اصلی">
+      <a href="#home">خانه</a>
+      <a href="#services">خدمات</a>
+      <a href="#tools">ابزارها</a>
+      <a href="#portfolio">نمونه‌کارها</a>
+      <a href="#education">آموزش</a>
+      <a href="#about">درباره ما</a>
+      <a href="#contact">ارتباط با ما</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#contact" class="btn btn-primary btn-sm">شروع یک پروژه</a>
+      <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="باز کردن منو">
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="منوی موبایل">
+  <ul>
+    <li><a href="#home">خانه</a></li>
+    <li><a href="#services">خدمات</a></li>
+    <li><a href="#tools">ابزارها</a></li>
+    <li><a href="#portfolio">نمونه‌کارها</a></li>
+    <li><a href="#education">آموزش</a></li>
+    <li><a href="#about">درباره ما</a></li>
+    <li><a href="#contact">ارتباط با ما</a></li>
+  </ul>
+  <a href="#contact" class="btn btn-primary btn-block">شروع یک پروژه</a>
+</nav>
+
+<main>
+<!-- ============================================================
+     Hero
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="wrap hero-row">
+    <div>
+      <h1 class="hero-title">هوش مصنوعی را به <span class="hl">ابزار خلاقیت</span> خودت تبدیل کن</h1>
+      <p class="hero-sub">هوش‌ساز، جایی برای ساخت تصویر، ویدیو، محتوا و ایده با قدرت هوش مصنوعی.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">شروع یک پروژه</a>
+        <a href="#tools" class="btn btn-ghost">مشاهده ابزارها</a>
+      </div>
+      <div class="hero-tags">
+        <span>تصویر</span><span>ویدیو</span><span>گرافیک</span><span>پرامپت‌نویسی</span><span>محتوا</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="glow"></div>
+      <svg viewBox="0 0 400 400">
+        <g class="orbit">
+          <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,106,31,.25)" stroke-width="1"/>
+          <circle cx="200" cy="50" r="6" fill="#ff6a1f"/>
+          <circle cx="350" cy="200" r="4" fill="#ffb37a"/>
+        </g>
+        <circle cx="200" cy="200" r="105" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <path d="M200 120 L235 185 L165 185 Z" fill="none" stroke="#ff6a1f" stroke-width="2"/>
+        <path d="M140 240 a60 60 0 1 0 120 0" fill="none" stroke="#ffb37a" stroke-width="2"/>
+        <rect x="184" y="184" width="32" height="32" rx="8" fill="#ff6a1f"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Services
+     ============================================================ -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">خدمات هوش‌ساز</span>
+      <h2 class="section-title">همه‌چیز برای ساختن ایده‌ات</h2>
+      <p class="section-desc">از تصویر تا ویدیو، از لوگو تا کمپین تبلیغاتی؛ هوش‌ساز کنار توست تا ایده‌ات را با کمک هوش مصنوعی به نتیجه برسانی.</p>
+    </div>
+    <div class="svc-grid" id="svcGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Tools Dashboard
+     ============================================================ -->
+<section class="section" id="tools">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">ابزارهای هوش‌ساز</span>
+      <h2 class="section-title">ابزارهایی که واقعاً برایت کار می‌کنند</h2>
+      <p class="section-desc">یک ورودی بده، خروجی آماده بگیر. ده ابزار برای پرامپت، کپشن، سناریو و ایده‌پردازی محتوا.</p>
+    </div>
+    <div class="dash reveal">
+      <div class="dash-tabs" id="dashTabs" role="tablist" aria-label="ابزارهای هوش‌ساز"></div>
+      <div id="dashPanels"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Idea of the day
+     ============================================================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="idea-box reveal">
+      <div>
+        <span class="eyebrow">ایده امروز برای کانال</span>
+        <h2 class="section-title" style="font-size:1.6rem; margin-bottom:20px;">چند ایده تازه برای امروز</h2>
+        <div class="idea-cards" id="ideaCards"></div>
+        <button class="btn btn-ghost" id="newIdeaBtn" style="margin-top:22px;">ایده جدید</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Portfolio
+     ============================================================ -->
+<section class="section" id="portfolio">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">نمونه‌کار</span>
+      <h2 class="section-title">نمونه‌کارهای هوش‌ساز</h2>
+      <p class="section-desc">نگاهی به بخشی از پروژه‌های تصویر، ویدیو، گرافیک و تبلیغاتی که با هوش‌ساز ساخته شده‌اند.</p>
+    </div>
+    <div class="filters reveal" id="pfFilters"></div>
+    <div class="pf-grid" id="pfGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Before / After
+     ============================================================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-inline:auto; text-align:center;">
+      <span class="eyebrow" style="justify-content:center;">از ایده تا نتیجه</span>
+      <h2 class="section-title">قدرت هوش مصنوعی را ببین</h2>
+      <p class="section-desc" style="margin-inline:auto;">اسلایدر را جابه‌جا کن تا فاصله‌ی بین یک ایده‌ی خام و نتیجه‌ی نهایی را ببینی.</p>
+    </div>
+    <div class="ba-wrap reveal" id="baWrap">
+      <div class="ba-layer ba-after">نتیجه‌ی نهایی</div>
+      <div class="ba-layer ba-before" id="baBefore">ایده‌ی خام</div>
+      <span class="ba-label l-before">قبل</span>
+      <span class="ba-label l-after">بعد</span>
+      <div class="ba-handle" id="baHandle">
+        <div class="ba-line"></div>
+        <div class="ba-grip">↔</div>
+      </div>
+      <input type="range" class="ba-range" id="baRange" min="0" max="100" value="50" aria-label="مقایسه قبل و بعد">
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Process
+     ============================================================ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">روند کار</span>
+      <h2 class="section-title">چطور با هوش‌ساز کار کنیم؟</h2>
+    </div>
+    <div class="process-grid" id="processGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Education
+     ============================================================ -->
+<section class="section" id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">یادگیری</span>
+      <h2 class="section-title">آموزش‌های هوش مصنوعی</h2>
+      <p class="section-desc">مسیر یادگیری پرامپت‌نویسی، تولید تصویر و ویدیو با هوش مصنوعی را قدم‌به‌قدم پیش برو.</p>
+    </div>
+    <div class="edu-grid" id="eduGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Blog / News
+     ============================================================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">تازه‌ها</span>
+      <h2 class="section-title">آخرین مطالب هوش مصنوعی</h2>
+    </div>
+    <div class="blog-grid" id="blogGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Stats
+     ============================================================ -->
+<section class="section">
+  <div class="wrap">
+    <div class="stats-grid" id="statsGrid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Contact CTA
+     ============================================================ -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="cta-panel reveal">
+      <h2>ایده‌ای داری؟ با ما بسازش.</h2>
+      <p>اگر برای تصویر، ویدیو، طراحی، تبلیغات یا تولید محتوا ایده‌ای داری، با ادمین هوش‌ساز در ارتباط باش.</p>
+      <a href="https://eitaa.com/AI_Sazi" target="_blank" rel="noopener" class="btn btn-primary">💬 پیام به ادمین</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================================================
+     Footer
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#1d1a15"/><path d="M20 46V18h7v11.5h10V18h7v28h-7V35.8H27V46z" fill="#ff6a1f"/><circle cx="47" cy="16" r="4" fill="#ff6a1f"/></svg>
+          <span>هوش‌ساز</span>
+        </div>
+        <p class="desc">ایده‌ات رو به واقعیت تبدیل کن؛ استودیوی تولید محتوا و طراحی با هوش مصنوعی.</p>
+        <div class="footer-social" style="margin-top:20px;">
+          <a href="https://eitaa.com/Hoosh_Saz" target="_blank" rel="noopener" aria-label="ایتا">📱</a>
+          <a href="https://rubika.ir/hoosh_saz" target="_blank" rel="noopener" aria-label="روبیکا">🟣</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>دسترسی سریع</h5>
+        <ul>
+          <li><a href="#home">خانه</a></li>
+          <li><a href="#services">خدمات</a></li>
+          <li><a href="#tools">ابزارها</a></li>
+          <li><a href="#portfolio">نمونه‌کارها</a></li>
+          <li><a href="#education">آموزش</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>خدمات</h5>
+        <ul>
+          <li><a href="#services">تصویر</a></li>
+          <li><a href="#services">ویدیو</a></li>
+          <li><a href="#services">گرافیک</a></li>
+          <li><a href="#tools">پرامپت</a></li>
+          <li><a href="#services">محتوا</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>ارتباط</h5>
+        <ul>
+          <li><a href="https://eitaa.com/Hoosh_Saz" target="_blank" rel="noopener">کانال ایتا</a></li>
+          <li><a href="https://rubika.ir/hoosh_saz" target="_blank" rel="noopener">کانال روبیکا</a></li>
+          <li><a href="https://eitaa.com/AI_Sazi" target="_blank" rel="noopener">ارتباط با ادمین</a></li>
+          <li><span style="color:var(--text-faint);">@AI_Sazi</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© ۱۴۰۴ هوش‌ساز. تمامی حقوق محفوظ است.</span>
+      <span>ساخته‌شده با ❤ و هوش مصنوعی</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     Floating Action Button
+     ============================================================ -->
+<div class="fab-wrap">
+  <div class="fab-menu" id="fabMenu" role="menu">
+    <a href="https://eitaa.com/AI_Sazi" target="_blank" rel="noopener">📱 پیام در ایتا</a>
+    <a href="https://rubika.ir/hoosh_saz" target="_blank" rel="noopener">🟣 مشاهده کانال روبیکا</a>
+    <a href="https://eitaa.com/Hoosh_Saz" target="_blank" rel="noopener">📣 مشاهده کانال ایتا</a>
+    <a href="#contact">📋 ثبت سفارش</a>
+  </div>
+  <button class="fab-btn" id="fabBtn" aria-expanded="false" aria-controls="fabMenu">💬 ارتباط با ادمین</button>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   Sticky header
+   ============================================================ */
+var header = document.getElementById('siteHeader');
+function onScroll(){
+  if(window.scrollY > 30){ header.classList.add('is-stuck'); }
+  else{ header.classList.remove('is-stuck'); }
+}
+document.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* ============================================================
+   Mobile menu
+   ============================================================ */
+var hamburger = document.getElementById('hamburgerBtn');
+var mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', function(){
+  var open = hamburger.getAttribute('aria-expanded') === 'true';
+  hamburger.setAttribute('aria-expanded', String(!open));
+  mobileNav.classList.toggle('is-open', !open);
+  document.body.style.overflow = !open ? 'hidden' : '';
+});
+mobileNav.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click', function(){
+    hamburger.setAttribute('aria-expanded','false');
+    mobileNav.classList.remove('is-open');
+    document.body.style.overflow = '';
+  });
+});
+
+/* ============================================================
+   Scroll reveal
+   ============================================================ */
+var revealEls = document.querySelectorAll('.reveal');
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+    });
+  }, {threshold:.15});
+  revealEls.forEach(function(el){ io.observe(el); });
+}else{
+  revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+}
+
+/* ============================================================
+   Services data + render
+   ============================================================ */
+var ICONS = {
+  image: '<path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z" stroke-width="1.6"/><circle cx="9" cy="10" r="1.6" stroke-width="1.6"/><path d="m5 17 5-5 3 3 3-4 4 5" stroke-width="1.6" fill="none"/>',
+  video: '<path d="M4 7a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7z" stroke-width="1.6"/><path d="m17 10 4-2.5v9L17 14" stroke-width="1.6" stroke-linejoin="round"/>',
+  logo: '<path d="M12 3v4M12 17v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M3 12h4M17 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="3.4" stroke-width="1.6"/>',
+  graphic: '<rect x="3.5" y="3.5" width="8" height="8" rx="2" stroke-width="1.6"/><rect x="12.5" y="3.5" width="8" height="8" rx="2" stroke-width="1.6"/><rect x="3.5" y="12.5" width="8" height="8" rx="2" stroke-width="1.6"/><rect x="12.5" y="12.5" width="8" height="8" rx="2" stroke-width="1.6"/>',
+  ad: '<path d="M3 10v4h3l5 4V6l-5 4H3z" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" stroke-width="1.6" stroke-linecap="round"/>',
+  prompt: '<path d="m6 8 4 4-4 4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 16h5" stroke-width="1.8" stroke-linecap="round"/><rect x="3" y="4" width="18" height="16" rx="3" stroke-width="1.6"/>',
+  idea: '<path d="M9 18h6M10 21h4" stroke-width="1.6" stroke-linecap="round"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1.1 1.2 1.2 2.2h4.8c.1-1 .6-1.7 1.2-2.2A6 6 0 0 0 12 3z" stroke-width="1.6"/>',
+  edu: '<path d="M12 4 2 9l10 5 10-5-10-5z" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" stroke-width="1.6"/>'
+};
+function icon(name){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round">'+ICONS[name]+'</svg>'; }
+
+var SERVICES = [
+  {icon:'image', title:'طراحی تصاویر با هوش مصنوعی', desc:'تولید تصاویر خلاقانه و حرفه‌ای برای پست، تبلیغات و برندینگ با کمک هوش مصنوعی.'},
+  {icon:'video', title:'ساخت ویدیو با هوش مصنوعی', desc:'تولید ویدیوهای کوتاه و جذاب برای کانال و شبکه‌های اجتماعی از ایده تا خروجی نهایی.'},
+  {icon:'logo', title:'طراحی لوگو', desc:'طراحی لوگوی حرفه‌ای و متناسب با هویت برند تو، آماده استفاده در همه پلتفرم‌ها.'},
+  {icon:'graphic', title:'طراحی گرافیک', desc:'طراحی بنر، پست شبکه‌های اجتماعی و مواد گرافیکی با استاندارد بصری بالا.'},
+  {icon:'ad', title:'تولید محتوای تبلیغاتی', desc:'نوشتن و طراحی محتوای تبلیغاتی که واقعاً مخاطب را به عمل ترغیب می‌کند.'},
+  {icon:'prompt', title:'پرامپت‌نویسی', desc:'نوشتن پرامپت‌های دقیق و حرفه‌ای برای گرفتن بهترین خروجی از ابزارهای هوش مصنوعی.'},
+  {icon:'idea', title:'ایده‌پردازی محتوا', desc:'طوفان فکری و ارائه ایده‌های تازه برای کانال، پیج یا کمپین تبلیغاتی تو.'},
+  {icon:'edu', title:'آموزش ابزارهای هوش مصنوعی', desc:'یادگیری کاربردی ابزارهای روز هوش مصنوعی برای تولید محتوای حرفه‌ای.'}
+];
+document.getElementById('svcGrid').innerHTML = SERVICES.map(function(s){
+  return '<div class="svc-card"><div class="svc-icon">'+icon(s.icon)+'</div><h3>'+s.title+'</h3><p>'+s.desc+'</p>'+
+    '<a href="#tools" class="svc-more">بیشتر بدانید <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></a></div>';
+}).join('');
+
+/* ============================================================
+   Tools dashboard — data + generators
+   ============================================================ */
+var TOOLS = [
+  {id:'prompt', ic:'🧠', name:'پرامپت‌ساز'},
+  {id:'caption', ic:'✍️', name:'کپشن‌ساز'},
+  {id:'scenario', ic:'🎬', name:'سناریوساز ویدیو'},
+  {id:'idea', ic:'💡', name:'ایده‌پرداز محتوا'},
+  {id:'ad', ic:'📢', name:'متن تبلیغاتی'},
+  {id:'imgidea', ic:'🎨', name:'تولید ایده تصویر'},
+  {id:'img2prompt', ic:'🖼️', name:'تبدیل عکس به پرامپت'},
+  {id:'channel', ic:'📱', name:'تولید محتوای کانال'},
+  {id:'optimize', ic:'🔍', name:'بهینه‌سازی پرامپت'},
+  {id:'title', ic:'🎯', name:'تولید عنوان جذاب'}
+];
+
+var PANEL_HTML = {
+  prompt: {
+    title:'پرامپت‌ساز', hint:'ایده‌ات را توضیح بده تا یک پرامپت آماده و دقیق برایت بسازیم.',
+    fields:
+      '<div class="field"><label for="p-idea">ایده‌ات را توضیح بده</label><textarea id="p-idea" placeholder="مثلا: یک منظره غروب کنار دریا با حال‌وهوای آرام"></textarea></div>'+
+      '<div class="field"><label for="p-type">نوع خروجی</label><select id="p-type"><option value="تصویر">تصویر</option><option value="ویدیو">ویدیو</option><option value="متن">متن</option></select></div>',
+    action:'تولید پرامپت'
+  },
+  caption:{
+    title:'کپشن‌ساز', hint:'موضوع پست را بنویس تا کپشن و هشتگ مناسب دریافت کنی.',
+    fields:
+      '<div class="field"><label for="c-topic">موضوع پست</label><input type="text" id="c-topic" placeholder="مثلا: معرفی خدمات جدید"></div>'+
+      '<div class="field"><label for="c-tone">لحن</label><select id="c-tone"><option value="دوستانه">دوستانه</option><option value="رسمی">رسمی</option><option value="طنز">طنز</option></select></div>',
+    action:'تولید کپشن'
+  },
+  scenario:{
+    title:'سناریوساز ویدیو', hint:'موضوع ویدیو را بگو تا یک سناریوی صحنه‌به‌صحنه بگیری.',
+    fields:
+      '<div class="field"><label for="s-topic">موضوع ویدیو</label><input type="text" id="s-topic" placeholder="مثلا: معرفی محصول جدید"></div>'+
+      '<div class="field"><label for="s-len">مدت زمان</label><select id="s-len"><option value="۱۵ ثانیه">۱۵ ثانیه</option><option value="۳۰ ثانیه">۳۰ ثانیه</option><option value="۶۰ ثانیه">۶۰ ثانیه</option></select></div>',
+    action:'تولید سناریو'
+  },
+  idea:{
+    title:'ایده‌پرداز محتوا', hint:'حوزه فعالیتت را بگو تا چند ایده محتوایی تازه بگیری.',
+    fields:'<div class="field"><label for="i-field">حوزه فعالیت</label><input type="text" id="i-field" placeholder="مثلا: قهوه و کافه"></div>',
+    action:'تولید ایده'
+  },
+  ad:{
+    title:'متن تبلیغاتی', hint:'محصول یا خدمتت را معرفی کن تا یک متن تبلیغاتی حرفه‌ای بگیری.',
+    fields:
+      '<div class="field"><label for="a-prod">محصول یا خدمت</label><input type="text" id="a-prod" placeholder="مثلا: دوره آموزش پرامپت‌نویسی"></div>'+
+      '<div class="field"><label for="a-tone">لحن</label><select id="a-tone"><option value="مطمئن">مطمئن</option><option value="صمیمی">صمیمی</option><option value="فوری">فوری و محدود</option></select></div>',
+    action:'تولید متن تبلیغاتی'
+  },
+  imgidea:{
+    title:'تولید ایده تصویر', hint:'موضوع را بگو تا چند ایده بصری برای طراحی تصویر بگیری.',
+    fields:'<div class="field"><label for="ii-topic">موضوع تصویر</label><input type="text" id="ii-topic" placeholder="مثلا: هویت بصری برند تکنولوژی"></div>',
+    action:'تولید ایده تصویر'
+  },
+  img2prompt:{
+    title:'تبدیل عکس به پرامپت', hint:'در حالت دمو، توضیح تصویر را بنویس تا به پرامپت دقیق تبدیل شود.',
+    fields:'<div class="field"><label for="ip-desc">توضیح تصویر</label><textarea id="ip-desc" placeholder="مثلا: عکس یک فنجان قهوه روی میز چوبی با نور طبیعی"></textarea></div>',
+    action:'تبدیل به پرامپت'
+  },
+  channel:{
+    title:'تولید محتوای مناسب کانال', hint:'موضوع کانالت و پلتفرم را بگو تا پیشنهاد محتوا بگیری.',
+    fields:
+      '<div class="field"><label for="ch-topic">موضوع کانال</label><input type="text" id="ch-topic" placeholder="مثلا: آموزش هوش مصنوعی"></div>'+
+      '<div class="field"><label for="ch-platform">پلتفرم</label><select id="ch-platform"><option value="ایتا">ایتا</option><option value="روبیکا">روبیکا</option><option value="اینستاگرام">اینستاگرام</option></select></div>',
+    action:'تولید محتوا'
+  },
+  optimize:{
+    title:'بهینه‌سازی پرامپت', hint:'پرامپت فعلی‌ات را وارد کن تا نسخه دقیق‌تر و حرفه‌ای‌تری بگیری.',
+    fields:'<div class="field"><label for="op-text">پرامپت فعلی</label><textarea id="op-text" placeholder="مثلا: یک عکس از گربه بساز"></textarea></div>',
+    action:'بهینه‌سازی'
+  },
+  title:{
+    title:'تولید عنوان جذاب', hint:'موضوع محتوایت را بگو تا چند عنوان جذاب پیشنهاد بگیری.',
+    fields:'<div class="field"><label for="t-topic">موضوع محتوا</label><input type="text" id="t-topic" placeholder="مثلا: نکات تولید محتوا با هوش مصنوعی"></div>',
+    action:'تولید عنوان'
+  }
+};
+
+var dashTabs = document.getElementById('dashTabs');
+var dashPanels = document.getElementById('dashPanels');
+
+dashTabs.innerHTML = TOOLS.map(function(t,i){
+  return '<button class="dash-tab'+(i===0?' is-active':'')+'" data-tool="'+t.id+'" role="tab" aria-selected="'+(i===0?'true':'false')+'"><span class="ic">'+t.ic+'</span>'+t.name+'</button>';
+}).join('');
+
+dashPanels.innerHTML = TOOLS.map(function(t,i){
+  var p = PANEL_HTML[t.id];
+  return '<div class="dash-panel'+(i===0?' is-active':'')+'" id="panel-'+t.id+'" role="tabpanel">'+
+    '<h3>'+p.title+'</h3><p class="hint">'+p.hint+'</p>'+
+    '<form data-tool="'+t.id+'">'+ p.fields +
+    '<div class="dash-actions"><button type="submit" class="btn btn-primary btn-sm">'+p.action+'</button>'+
+    '<button type="button" class="btn btn-ghost btn-sm" data-reset>پاک‌سازی</button></div></form>'+
+    '<div class="result-box is-empty" id="result-'+t.id+'">نتیجه اینجا نمایش داده می‌شود…</div>'+
+    '<div class="result-actions"><button type="button" data-copy="'+t.id+'">📋 کپی نتیجه</button></div>'+
+  '</div>';
+}).join('');
+
+dashTabs.addEventListener('click', function(e){
+  var btn = e.target.closest('.dash-tab');
+  if(!btn) return;
+  var id = btn.dataset.tool;
+  dashTabs.querySelectorAll('.dash-tab').forEach(function(b){
+    b.classList.toggle('is-active', b === btn);
+    b.setAttribute('aria-selected', b === btn ? 'true':'false');
+  });
+  dashPanels.querySelectorAll('.dash-panel').forEach(function(p){
+    p.classList.toggle('is-active', p.id === 'panel-'+id);
+  });
+});
+
+/* ---- generation logic ---- */
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function val(id){ var el=document.getElementById(id); return el ? el.value.trim() : ''; }
+
+var GEN = {
+  prompt: function(){
+    var idea = val('p-idea') || 'یک صحنه خلاقانه و الهام‌بخش';
+    var type = val('p-type');
+    var style = pick(['نورپردازی سینمایی','رنگ‌های گرم و طبیعی','کیفیت فوق واقع‌گرایانه','ترکیب‌بندی مینیمال','فضای رویاگونه']);
+    var camera = pick(['نمای نزدیک','نمای واید','زاویه پایین دوربین','نمای ایزومتریک']);
+    if(type==='متن'){
+      return 'یک متن خلاقانه درباره «'+idea+'» بنویس با لحن الهام‌بخش، جملات کوتاه و پایانی تاثیرگذار.';
+    }
+    return 'یک '+type+' با موضوع «'+idea+'»، با '+style+'، '+camera+' و جزئیات بصری دقیق و حرفه‌ای بساز.';
+  },
+  caption:function(){
+    var topic = val('c-topic') || 'محتوای امروز';
+    var tone = val('c-tone');
+    var openers = {'دوستانه':'سلام رفقا! 👋','رسمی':'با احترام، به اطلاع می‌رسانیم که','طنز':'خب بچه‌ها، وقتشه که 😄'};
+    var body = openers[tone]+' امروز می‌خوایم درباره «'+topic+'» باهاتون حرف بزنیم. اگه فکر می‌کنید این موضوع به دردتون می‌خوره، حتما نظرتون رو زیر همین پست بنویسید.';
+    var hashtags = '#هوش_ساز #'+topic.replace(/\s+/g,'_')+' #تولید_محتوا #هوش_مصنوعی';
+    return body + '\n\n' + hashtags;
+  },
+  scenario:function(){
+    var topic = val('s-topic') || 'معرفی ایده';
+    var len = val('s-len');
+    return 'سناریوی ویدیوی '+len+' با موضوع «'+topic+'»:\n\n'+
+      '۱. صحنه آغازین: یک قلاب کوتاه و جذاب برای جلب توجه بیننده در ۲ ثانیه اول.\n'+
+      '۲. صحنه میانی: معرفی «'+topic+'» با تصاویر یا مثال‌های ملموس.\n'+
+      '۳. صحنه اوج: نشان‌دادن نتیجه یا تفاوت پیش و پس از استفاده.\n'+
+      '۴. صحنه پایانی: دعوت به اقدام (فالو، پیام به ادمین یا مشاهده بیشتر).';
+  },
+  idea:function(){
+    var field = val('i-field') || 'حوزه فعالیت تو';
+    var ideas = [
+      'یک پست آموزشی درباره اشتباهات رایج در '+field,
+      'یک ویدیوی کوتاه از پشت‌صحنه کار در '+field,
+      'یک نظرسنجی از مخاطبان درباره تجربه‌شان با '+field,
+      'یک پست مقایسه‌ای بین دو روش رایج در '+field,
+      'معرفی یک نکته کاربردی و کم‌شناخته در '+field
+    ];
+    return ideas.map(function(t,i){ return (i+1)+'. '+t; }).join('\n');
+  },
+  ad:function(){
+    var prod = val('a-prod') || 'محصول شما';
+    var tone = val('a-tone');
+    var closing = {'مطمئن':'همین حالا تصمیم بگیر و تجربه‌اش کن.','صمیمی':'بیا با هم این تجربه رو شروع کنیم.','فوری و محدود':'ظرفیت محدوده، همین امروز اقدام کن.'};
+    return '«'+prod+'» رو با هوش‌ساز به شکلی متفاوت تجربه کن.\nدقیق، سریع و حرفه‌ای؛ همون چیزی که برای رشد کسب‌وکارت لازم داری.\n'+closing[tone];
+  },
+  imgidea:function(){
+    var topic = val('ii-topic') || 'هویت بصری برند';
+    var ideas = [
+      'ترکیب رنگ نارنجی و مشکی با نورپردازی نئونی برای '+topic,
+      'یک کمپوزیسیون مینیمال با فضای خالی زیاد برای '+topic,
+      'استفاده از اشکال هندسی و خطوط تکنولوژی برای '+topic,
+      'یک تصویر با کنتراست بالا و سایه‌های دراماتیک برای '+topic
+    ];
+    return ideas.map(function(t,i){ return (i+1)+'. '+t; }).join('\n');
+  },
+  img2prompt:function(){
+    var desc = val('ip-desc') || 'توضیح تصویر مورد نظر';
+    return 'پرامپت پیشنهادی بر اساس توضیح تو:\n«'+desc+'، با کیفیت بالا، نور طبیعی، جزئیات دقیق و ترکیب‌بندی حرفه‌ای»\n\n(این بخش در حالت دمو، پرامپت را از روی توضیح متنی می‌سازد.)';
+  },
+  channel:function(){
+    var topic = val('ch-topic') || 'موضوع کانال';
+    var platform = val('ch-platform');
+    return 'پیشنهاد محتوا برای '+platform+' با موضوع «'+topic+'»:\n\n'+
+      '- یک پست کوتاه آموزشی با یک نکته کاربردی\n'+
+      '- یک نظرسنجی برای افزایش تعامل مخاطبان\n'+
+      '- معرفی یک ابزار یا منبع مفید مرتبط با «'+topic+'»\n'+
+      '- یک پست پشت‌صحنه از فرآیند کار تیم شما';
+  },
+  optimize:function(){
+    var text = val('op-text') || 'پرامپت شما';
+    return 'نسخه بهینه‌شده:\n«'+text+'، با جزئیات دقیق‌تر درباره سبک، نورپردازی، زاویه دید و کیفیت خروجی، به همراه توضیح فضا و حس‌وحال کلی اثر»';
+  },
+  title:function(){
+    var topic = val('t-topic') || 'موضوع محتوا';
+    var titles = [
+      'هر آنچه باید درباره '+topic+' بدانید',
+      '۵ نکته کاربردی درباره '+topic,
+      'راهنمای کامل '+topic+' برای شروع',
+      'اشتباهی که در '+topic+' نباید مرتکب شوید',
+      topic+'؛ از صفر تا حرفه‌ای'
+    ];
+    return titles.map(function(t,i){ return (i+1)+'. '+t; }).join('\n');
+  }
+};
+
+dashPanels.addEventListener('submit', function(e){
+  e.preventDefault();
+  var form = e.target;
+  var id = form.dataset.tool;
+  var box = document.getElementById('result-'+id);
+  var output = GEN[id] ? GEN[id]() : '';
+  box.textContent = output;
+  box.classList.remove('is-empty');
+});
+
+dashPanels.addEventListener('click', function(e){
+  if(e.target.closest('[data-reset]')){
+    var form = e.target.closest('.dash-panel').querySelector('form');
+    form.reset();
+    var id = form.dataset.tool;
+    var box = document.getElementById('result-'+id);
+    box.textContent = 'نتیجه اینجا نمایش داده می‌شود…';
+    box.classList.add('is-empty');
+  }
+  var copyBtn = e.target.closest('[data-copy]');
+  if(copyBtn){
+    var id2 = copyBtn.dataset.copy;
+    var box2 = document.getElementById('result-'+id2);
+    var text = box2.classList.contains('is-empty') ? '' : box2.textContent;
+    if(text && navigator.clipboard){
+      navigator.clipboard.writeText(text).then(function(){
+        var old = copyBtn.textContent;
+        copyBtn.textContent = '✅ کپی شد';
+        setTimeout(function(){ copyBtn.textContent = old; }, 1600);
+      });
+    }
+  }
+});
+
+/* ============================================================
+   Idea of the day
+   ============================================================ */
+var IDEA_POOL = [
+  {tag:'ایده پست', text:'۳ اشتباه رایجی که هنگام استفاده از هوش مصنوعی برای تولید محتوا رخ می‌دهد.'},
+  {tag:'ایده ویدیو', text:'یک ویدیوی ۳۰ ثانیه‌ای از فرآیند تبدیل یک ایده ساده به تصویر نهایی.'},
+  {tag:'ایده تبلیغاتی', text:'معرفی تخفیف ویژه برای اولین پروژه با هوش‌ساز به‌صورت محدود و فوری.'},
+  {tag:'ایده آموزشی', text:'آموزش نوشتن یک پرامپت حرفه‌ای در سه گام ساده برای مبتدیان.'},
+  {tag:'ایده پست', text:'مقایسه یک محتوای ساخته‌شده با و بدون کمک هوش مصنوعی.'},
+  {tag:'ایده ویدیو', text:'پشت‌صحنه‌ی ساخت یک لوگو با کمک هوش مصنوعی از ایده تا نسخه نهایی.'},
+  {tag:'ایده تبلیغاتی', text:'دعوت مخاطبان به ثبت سفارش رایگان مشاوره ایده برای پروژه بعدی‌شان.'},
+  {tag:'ایده آموزشی', text:'۵ ابزار هوش مصنوعی که هر تولیدکننده محتوا باید بشناسد.'}
+];
+function renderIdeas(){
+  var shuffled = IDEA_POOL.slice().sort(function(){ return Math.random()-.5; }).slice(0,4);
+  document.getElementById('ideaCards').innerHTML = shuffled.map(function(i){
+    return '<div class="idea-card"><span class="tag">'+i.tag+'</span><p>'+i.text+'</p></div>';
+  }).join('');
+}
+renderIdeas();
+document.getElementById('newIdeaBtn').addEventListener('click', renderIdeas);
+
+/* ============================================================
+   Portfolio
+   ============================================================ */
+var PF_CATS = ['همه','تصویر','ویدیو','گرافیک','تبلیغات'];
+var PORTFOLIO = [
+  {cat:'تصویر', title:'مجموعه تصاویر مفهومی برند تکنولوژی', desc:'ست تصاویر تولیدشده برای کمپین معرفی محصول.'},
+  {cat:'ویدیو', title:'تیزر تبلیغاتی ۳۰ ثانیه‌ای', desc:'ویدیوی کوتاه تبلیغاتی برای شبکه‌های اجتماعی.'},
+  {cat:'گرافیک', title:'ست پست‌های اینستاگرام یک کافه', desc:'طراحی هویت بصری منسجم برای صفحه یک کافه.'},
+  {cat:'تبلیغات', title:'کمپین تبلیغاتی فروش ویژه', desc:'محتوای متنی و بصری برای کمپین فروش فصلی.'},
+  {cat:'تصویر', title:'طراحی پوستر رویداد آنلاین', desc:'پوستر مفهومی برای یک وبینار آموزشی.'},
+  {cat:'گرافیک', title:'طراحی لوگو برای استارتاپ نوپا', desc:'طراحی هویت بصری اولیه یک استارتاپ فناوری.'},
+  {cat:'ویدیو', title:'موشن گرافیک معرفی خدمات', desc:'ویدیوی موشن گرافیک برای توضیح خدمات یک شرکت.'},
+  {cat:'تبلیغات', title:'متن و طراحی بنر تخفیف ویژه', desc:'ترکیب متن تبلیغاتی و طراحی بصری برای یک تخفیف.'},
+  {cat:'تصویر', title:'تصاویر محصول برای فروشگاه آنلاین', desc:'تصاویر تولیدشده برای نمایش محصولات یک فروشگاه.'}
+];
+document.getElementById('pfFilters').innerHTML = PF_CATS.map(function(c,i){
+  return '<button class="filter-btn'+(i===0?' is-active':'')+'" data-cat="'+c+'">'+c+'</button>';
+}).join('');
+document.getElementById('pfGrid').innerHTML = PORTFOLIO.map(function(p){
+  return '<div class="pf-item" data-cat="'+p.cat+'"><div class="pf-thumb"><div class="ph">'+p.cat+'</div></div>'+
+    '<div class="pf-body"><span class="pf-cat">'+p.cat+'</span><h4>'+p.title+'</h4><p>'+p.desc+'</p></div></div>';
+}).join('');
+document.getElementById('pfFilters').addEventListener('click', function(e){
+  var btn = e.target.closest('.filter-btn');
+  if(!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.toggle('is-active', b===btn); });
+  var cat = btn.dataset.cat;
+  document.querySelectorAll('.pf-item').forEach(function(item){
+    item.classList.toggle('is-hidden', cat!=='همه' && item.dataset.cat!==cat);
+  });
+});
+
+/* ============================================================
+   Before / After slider
+   ============================================================ */
+var baRange = document.getElementById('baRange');
+var baBefore = document.getElementById('baBefore');
+var baHandle = document.getElementById('baHandle');
+function updateBa(v){
+  baBefore.style.clipPath = 'inset(0 0 0 '+v+'%)';
+  baHandle.style.left = v+'%';
+}
+baRange.addEventListener('input', function(){ updateBa(baRange.value); });
+updateBa(50);
+
+/* ============================================================
+   Process
+   ============================================================ */
+var STEPS = [
+  {n:'01', t:'ارسال ایده', d:'ایده، نیاز یا بریفت پروژه‌ات را برای تیم هوش‌ساز ارسال می‌کنی.'},
+  {n:'02', t:'بررسی پروژه', d:'ایده‌ات بررسی و بهترین مسیر اجرا برایش پیشنهاد داده می‌شود.'},
+  {n:'03', t:'تولید محتوا', d:'محتوای موردنظر با کمک هوش مصنوعی و نظارت تیم تولید می‌شود.'},
+  {n:'04', t:'تحویل نهایی', d:'خروجی نهایی آماده و برای استفاده در اختیار تو قرار می‌گیرد.'}
+];
+document.getElementById('processGrid').innerHTML = STEPS.map(function(s){
+  return '<div class="step"><span class="num">'+s.n+'</span><h4>'+s.t+'</h4><p>'+s.d+'</p></div>';
+}).join('');
+
+/* ============================================================
+   Education
+   ============================================================ */
+var EDU = [
+  {t:'پرامپت‌نویسی حرفه‌ای', d:'اصول نوشتن پرامپت دقیق برای گرفتن بهترین خروجی از ابزارهای هوش مصنوعی.', time:'۸ دقیقه'},
+  {t:'ساخت تصویر با هوش مصنوعی', d:'آموزش گام‌به‌گام تولید تصاویر حرفه‌ای برای برند و شبکه‌های اجتماعی.', time:'۱۲ دقیقه'},
+  {t:'ساخت ویدیو با هوش مصنوعی', d:'از ایده تا ویدیوی نهایی؛ آشنایی با فرآیند تولید ویدیوی هوشمند.', time:'۱۵ دقیقه'},
+  {t:'آشنایی با ابزارهای AI', d:'معرفی ابزارهای پرکاربرد هوش مصنوعی برای تولیدکنندگان محتوا.', time:'۱۰ دقیقه'},
+  {t:'ترفندهای تولید محتوا', d:'نکاتی برای تولید محتوای بیشتر و باکیفیت‌تر در زمان کمتر.', time:'۷ دقیقه'},
+  {t:'بهینه‌سازی خروجی هوش مصنوعی', d:'چطور نتایج هوش مصنوعی را ویرایش و برای انتشار آماده کنیم.', time:'۹ دقیقه'}
+];
+document.getElementById('eduGrid').innerHTML = EDU.map(function(e){
+  return '<div class="edu-card"><div class="edu-meta"><span>📘 آموزش</span><span>·</span><span>'+e.time+' مطالعه</span></div>'+
+    '<h4>'+e.t+'</h4><p>'+e.d+'</p><a href="#" class="svc-more">مشاهده آموزش <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></a></div>';
+}).join('');
+
+/* ============================================================
+   Blog
+   ============================================================ */
+var BLOG = [
+  {cat:'اخبار', t:'به‌روزرسانی ابزارهای هوش‌ساز در نسخه جدید', d:'نگاهی به تازه‌ترین قابلیت‌های اضافه‌شده به ابزارهای هوش‌ساز.'},
+  {cat:'ابزار جدید', t:'معرفی ابزار تازه بهینه‌سازی پرامپت', d:'چگونه با این ابزار خروجی دقیق‌تری از هوش مصنوعی بگیریم.'},
+  {cat:'ترفند', t:'۴ ترفند برای گرفتن تصاویر باکیفیت‌تر', d:'نکاتی ساده برای بهبود کیفیت تصاویر تولیدی با هوش مصنوعی.'}
+];
+document.getElementById('blogGrid').innerHTML = BLOG.map(function(b){
+  return '<div class="blog-card"><div class="blog-thumb">'+b.cat+'</div><div class="blog-body"><span class="blog-cat">'+b.cat+'</span><h4>'+b.t+'</h4><p>'+b.d+'</p></div></div>';
+}).join('');
+
+/* ============================================================
+   Stats + counter animation
+   ============================================================ */
+var STATS = [
+  {n:100, suffix:'+', l:'ایده و محتوا'},
+  {n:50, suffix:'+', l:'پروژه'},
+  {n:20, suffix:'+', l:'ابزار'},
+  {n:1000, suffix:'+', l:'مخاطب'}
+];
+var statsGrid = document.getElementById('statsGrid');
+statsGrid.innerHTML = STATS.map(function(s,i){
+  return '<div class="stat"><div class="n" data-target="'+s.n+'" data-suffix="'+s.suffix+'">0</div><div class="l">'+s.l+'</div></div>';
+}).join('');
+
+function animateCount(el){
+  var target = parseInt(el.dataset.target, 10);
+  var suffix = el.dataset.suffix || '';
+  var start = 0;
+  var duration = 1400;
+  var startTime = null;
+  function frame(ts){
+    if(!startTime) startTime = ts;
+    var progress = Math.min((ts-startTime)/duration, 1);
+    var value = Math.floor(progress * target);
+    el.textContent = value + suffix;
+    if(progress < 1){ requestAnimationFrame(frame); }
+    else{ el.textContent = target + suffix; }
+  }
+  requestAnimationFrame(frame);
+}
+if('IntersectionObserver' in window){
+  var statIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ animateCount(e.target); statIo.unobserve(e.target); }
+    });
+  }, {threshold:.4});
+  statsGrid.querySelectorAll('.n').forEach(function(el){ statIo.observe(el); });
+}else{
+  statsGrid.querySelectorAll('.n').forEach(function(el){ el.textContent = el.dataset.target + el.dataset.suffix; });
+}
+
+/* ============================================================
+   Floating action button
+   ============================================================ */
+var fabBtn = document.getElementById('fabBtn');
+var fabMenu = document.getElementById('fabMenu');
+fabBtn.addEventListener('click', function(){
+  var open = fabBtn.getAttribute('aria-expanded') === 'true';
+  fabBtn.setAttribute('aria-expanded', String(!open));
+  fabMenu.classList.toggle('is-open', !open);
+});
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.fab-wrap')){
+    fabBtn.setAttribute('aria-expanded','false');
+    fabMenu.classList.remove('is-open');
+  }
+});
+
+})();
+</script>
+</body>
+</html>
